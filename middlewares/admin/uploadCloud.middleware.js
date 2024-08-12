@@ -39,5 +39,4 @@ module.exports.uploadCloud = (req, res, next) => {
     else{
         next();
     }
-    
 }
