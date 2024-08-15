@@ -79,8 +79,6 @@ module.exports.edit = async (req, res) => {
     const records = await ProductCategory.find({deleted:false});
 
     const newRecords = createTreeHelper.tree(records);
-    
-    console.log(newRecords)
 
     res.render("admin/pages/products-category/edit", {
         pageTitle: "Trang danh mục sản phẩm",
