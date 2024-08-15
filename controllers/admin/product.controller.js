@@ -136,9 +136,9 @@ module.exports.createPost = async (req, res) => {
     res.redirect("back");
     return;
   }
-  req.body.price = parseInt(req.body.price * 1);
-  req.body.discountPercentage = parseInt(req.body.discountPercentage * 1);
-  req.body.stock = parseInt(req.body.stock * 1);
+  req.body.price = parseInt(req.body.price);
+  req.body.discountPercentage = parseInt(req.body.discountPercentage);
+  req.body.stock = parseInt(req.body.stock);
   if(req.body.position ==""){
     const countProducts = await Product.countDocuments();
     req.body.position = countProducts + 1;
