@@ -11,9 +11,12 @@ const roleSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  deletedTime: Date,
-  timestamps: true
-});
+  deletedTime: Date
+},
+  {
+    timestamps: true
+  }
+);
 
 const Role = mongoose.model("Role", roleSchema, "roles");
 
