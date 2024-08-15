@@ -137,7 +137,7 @@ module.exports.createPost = async (req, res) => {
   }
 
   const product = new Product(req.body);
-  product.save();
+  await product.save();
   res.redirect(`${systemConfig.prefixAdmin}/products`);
 }
 
@@ -150,7 +150,6 @@ module.exports.edit = async (req, res) => {
     }
   
     const product = await Product.findOne(find);
-    console.log(product);
   
     res.render("admin/pages/products/edit", {
       pageTitle: "Chỉnh sửa sản phẩm",
@@ -181,7 +180,7 @@ module.exports.editPatch = async (req, res) => {
     req.flash('error', `Cập nhật sản phẩm thất bại!`);
   }
   
-  res.redirect("back");
+  res.redirect(`${systemConfig.prefixAdmin}/products`);
 }
 
 //[GET] /admin/products/detail/:id
@@ -193,7 +192,6 @@ module.exports.detail = async (req, res) => {
     }
   
     const product = await Product.findOne(find);
-    console.log(product);
   
     res.render("admin/pages/products/detail", {
       pageTitle: "Chi tiết sản phẩm",
@@ -203,6 +201,5 @@ module.exports.detail = async (req, res) => {
     req.flash('error', `Trang này không tồn tại!`);
     res.redirect(`${systemConfig.prefixAdmin}/products`);
   }
-  
 }
 
