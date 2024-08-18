@@ -4,7 +4,9 @@ if(tablePermissions) {
     const buttonSubmit = document.querySelector("[button-submit]")
 
     buttonSubmit.addEventListener("click", () => {
-        let permissions = [];
+
+        let permissionsParent = [];
+
         const rows = tablePermissions.querySelectorAll("[data-name]");
 
         rows.forEach(row => {
@@ -14,34 +16,59 @@ if(tablePermissions) {
             if(name == "id") {
                 inputs.forEach(input => {
                     const id = input.value;
-                    permissions.push({
-                        id:id,
+                    permissionsParent.push({
+                        id: id,
                         permissions: []
-                    })
+                    });
                 });
             }
             else{
                 inputs.forEach((input, index) => {
                     const checked = input.checked;
 
-                    // console.log(name);
-                    // console.log(index);
-                    // console.log(checked);
-                    // console.log("--------------------");
+                    console.log(name);
+                    console.log(index);
+                    console.log(checked);
+                    console.log("--------------------");
                     if(checked){
-                        permissions[index].permissions.push(name);
+                    permissionsParent[index].permissions.push(name);
                     }
                 });
             }
         });
-        console.log(permissions);
+        console.log(permissionsParent);
 
-        if(permissions.length > 0) {
-            const formChangePermissions = document.querySelector("form-change-permissions")
-            const inputPermissions = formChangePermissions.querySelector("input[name='permissions'")
-            inputPermissions.value = JSON.stringify(permissions);
+        if(permissionsParent.length > 0) {
+            const formChangePermissions = document.querySelector("#form-change-permissions")
+            const inputPermissions = formChangePermissions.querySelector("input[name='permissions']")
+            inputPermissions.value = JSON.stringify(permissionsParent);
             formChangePermissions.submit();
         }
     });
 }
 // End Permisions
+
+
+// Permissions Data: hiển thị những ô mình đã check
+const dataRecords = document.querySelector("[data-records]");
+if(dataRecords) {
+    const records = JSON.parse(dataRecords.getAttribute("data-records"));
+
+    const tablePermissions = document.querySelector("[table-permissions]");
+
+    records.forEach((record, index) => {
+        const permissions = record.permissions;
+
+        permissions.forEach((permission) => {
+            console.log(permission);
+            console.log(index);
+            const row = tablePermissions.querySelector(`[data-name="${permission}"]`);
+
+            const input = row.querySelectorAll("input")[index];
+
+            input.checked = true;
+        });
+    });
+}
+
+// End Permissions Data: hiển thị những ô mình đã check
