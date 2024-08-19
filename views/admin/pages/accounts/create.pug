@@ -6,7 +6,7 @@ include ../../mixins/select-tree.pug
 block main 
 
     +alert-error("5000")
-
+    +alert-success("5000")
     h1(class="mb-4") Thêm mới tài khoản
 
     form(
@@ -35,7 +35,7 @@ block main
         div(class="form-group")
             label(for="password") Mật khẩu *
             input(
-                type="text"
+                type="password"
                 class="form-control"
                 id="password"
                 name="password"

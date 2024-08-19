@@ -60,3 +60,59 @@ module.exports.createPost = async (req, res) => {
     }
     
 }
+
+// [GET] /admin/accounts/edit/:id
+module.exports.edit = async (req, res) => {
+    let find = {
+        _id: req.params.id,
+        deleted: false
+    }
+    
+    try {
+        const data = await Account.findOne(find);
+
+        const roles = await Role.find({
+            deleted: false
+        })
+
+        res.render("admin/pages/accounts/edit",{
+            pageTitle: "Chỉnh sửa tài khoản",
+            data: data,
+            roles: roles
+        });
+        
+    } catch (error) {
+        res.redirect(`${systemConfig.prefixAdmin}/accounts`);
+    }
+}
+
+// [PATCH] /admin/accounts/edit/:id
+module.exports.editPatch = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const emailExisted = await Account.findOne({
+            email: req.body.email,
+            _id: { $ne: id }, // chú ý cái này ne là not equal để tìm những bản ghi khác thằng đó để cập nhật dữ liệu vì khi cập nhật tên thì email nó vẫn là cái đó nên là sẽ bị nhầm là error
+            deleted: false
+        });
+
+        if (emailExisted) {
+            req.flash('error', 'Email đã tồn tại!');
+            return res.redirect("back");
+        }
+
+        if (req.body.password) {
+            req.body.password = md5(req.body.password);
+        } else {
+            delete req.body.password;
+        }
+
+        await Account.updateOne({ _id: id }, req.body);
+        req.flash('success', 'Cập nhật tài khoản thành công');
+
+    } catch (error) {
+        req.flash('error', 'Cập nhật tài khoản thất bại!');
+    }
+    
+    res.redirect("back");
+};
