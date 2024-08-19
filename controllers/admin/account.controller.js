@@ -9,8 +9,17 @@ module.exports.index = async (req, res) => {
     let find = {
         deleted: false
     }
+    // select đó để lấy tất cả trừ 2 cái kia
+    const records = await Account.find(find).select("-password -token");
 
-    const records = await Account.find(find);
+    for (const record of records) {
+        const role = await Role.findOne({
+            deleted: false,
+            _id : record.role_id
+        });
+        record.role = role;
+    }
+
 
     res.render("admin/pages/accounts/index",{
         pageTitle: "Trang danh sách tài khoản",
