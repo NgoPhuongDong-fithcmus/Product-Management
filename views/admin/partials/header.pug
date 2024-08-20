@@ -5,5 +5,11 @@ header.header
                 .inner-logo 
                     a(href="/admin/dashboard") ADMIN 
 
-            .col-9 
-             
+            .col-1
+                div(class="text-right right-header")
+                    a(
+                        href=`${prefixAdmin}/auth/logout`
+                        class="btn btn-danger btn-sm"
+                    ) Đăng xuất
+
+script(src="../../../public/css/buttonLogout.css")
