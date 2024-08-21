@@ -7,77 +7,80 @@ include ../../mixins/alert.pug
 include ../../mixins/sort.pug
 
 block main 
+    if(role.permissions.includes("roles_view"))
+        +alert-success("5000")
 
-    +alert-success("5000")
+        h1 Trang nhóm quyền
 
-    h1 Trang nhóm quyền
-
-    .card.mb-3 
-        .card-header Danh sách
-            .card-body
-                .row 
-                    .col-8
-                        //- +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
-                    .col-4.text-right
-                        a(
-                            href=`${prefixAdmin}/roles/create`
-                            class="btn btn-outline-success"
-                        ) + Thêm mới
-                
-                table(
-                    class="table table-hover table-sm "
-                    checkbox-multi
-                )
-                    thead 
-                        tr  
-                            th 
-                                input(type="checkbox" name="checkall")
-                            th STT
-                            th Nhóm quyền
-                            th Mô tả ngắn
-                            th Hành động 
-                    tbody 
-                        if(records.length > 0)
-                            each item, index in records     
+        .card.mb-3 
+            .card-header Danh sách
+                .card-body
+                    .row 
+                        .col-8
+                            //- +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
+                        .col-4.text-right
+                            if(role.permissions.includes("roles_create"))
+                                a(
+                                    href=`${prefixAdmin}/roles/create`
+                                    class="btn btn-outline-success"
+                                ) + Thêm mới
+                    
+                    table(
+                        class="table table-hover table-sm "
+                        checkbox-multi
+                    )
+                        thead 
+                            tr  
+                                th 
+                                    input(type="checkbox" name="checkall")
+                                th STT
+                                th Nhóm quyền
+                                th Mô tả ngắn
+                                th Hành động 
+                        tbody 
+                            if(records.length > 0)
+                                each item, index in records     
+                                    tr 
+                                        td 
+                                            input(
+                                                type="checkbox"
+                                                name="id"
+                                                value=item.id
+                                            )
+                                        td #{index + 1}
+                                        td #{item.title}
+                                        td #{item.description}
+                                        td 
+                                            a(
+                                                href=`${prefixAdmin}/roles/detail/${item.id}`
+                                                class="btn btn-secondary btn-sm"
+                                            ) Chi tiết
+                                            if(role.permissions.includes("roles_edit"))
+                                                a(
+                                                    href=`${prefixAdmin}/roles/edit/${item.id}`
+                                                    class="btn btn-warning btn-sm"
+                                                ) Sửa
+                                            if(role.permissions.includes("roles_delete")) 
+                                                button(
+                                                    class="btn btn-danger btn-sm ml-1" 
+                                                    data-id=item.id 
+                                                    button-delete
+                                                ) Xóa
+                            else
                                 tr 
-                                    td 
-                                        input(
-                                            type="checkbox"
-                                            name="id"
-                                            value=item.id
-                                        )
-                                    td #{index + 1}
-                                    td #{item.title}
-                                    td #{item.description}
-                                    td 
-                                        a(
-                                            href=`${prefixAdmin}/roles/detail/${item.id}`
-                                            class="btn btn-secondary btn-sm"
-                                        ) Chi tiết
-                                        a(
-                                            href=`${prefixAdmin}/roles/edit/${item.id}`
-                                            class="btn btn-warning btn-sm"
-                                        ) Sửa 
-                                        button(
-                                            class="btn btn-danger btn-sm ml-1" 
-                                            data-id=item.id 
-                                            button-delete
-                                        ) Xóa
-                        else
-                            tr 
-                             td(colspan="4" class="text-center") Chưa có nhóm quyền nào được tạo
-    //- form(
-    //-     action=""
-    //-     method="POST"
-    //-     id="form-change-status"
-    //-     data-path=`${prefixAdmin}/products/change-status`
-    //- )
+                                    td(colspan="4" class="text-center") Chưa có nhóm quyền nào được tạo
+        //- form(
+        //-     action=""
+        //-     method="POST"
+        //-     id="form-change-status"
+        //-     data-path=`${prefixAdmin}/products/change-status`
+        //- )
 
-    //- form(
-    //-     action=""
-    //-     method="POST"
-    //-     id="form-delete-item"
-    //-     data-path=`${prefixAdmin}/products/delete`
-    //- )
+        //- form(
+        //-     action=""
+        //-     method="POST"
+        //-     id="form-delete-item"
+        //-     data-path=`${prefixAdmin}/products/delete`
+        //- )
 
-    //- script(src="/admin/js/product.js")
+        //- script(src="/admin/js/product.js")

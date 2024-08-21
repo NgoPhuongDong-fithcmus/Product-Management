@@ -70,5 +70,4 @@ if(dataRecords) {
         });
     });
 }
-
 // End Permissions Data: hiển thị những ô mình đã check

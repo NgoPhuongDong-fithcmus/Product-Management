@@ -6,22 +6,24 @@ html
 
         link(rel="stylesheet", href="/admin/css/style.css")
     body 
+        if(role.permissions.length > 0)
+            include ../partials/header.pug
 
-        include ../partials/header.pug
+            .body 
 
-        .body 
+                include ../partials/sider.pug
 
-            include ../partials/sider.pug
+                .main
+                    block main
+            script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js") 
+            script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js") 
 
-            .main
-                block main
-        script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js") 
-        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js") 
+            //- Tiny MCE
+            script(src="/tinymce/tinymce.min.js")
+            script(src="/admin/js/tinymce-config.js")
+            //- Tiny MCE
 
-        //- Tiny MCE
-        script(src="/tinymce/tinymce.min.js")
-        script(src="/admin/js/tinymce-config.js")
-        //- Tiny MCE
-
-        script(src="/admin/js/script.js")  
+            script(src="/admin/js/script.js")  
+        else 
+            h1 Bạn không được phép truy cập vào trang này
 

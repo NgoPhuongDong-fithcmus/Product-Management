@@ -6,7 +6,7 @@ const flash = require('express-flash')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const multer  = require('multer')
-
+const moment = require('moment')
 require("dotenv").config();
 
 const database = require("./config/database.js");
@@ -22,6 +22,7 @@ const routeAdmin = require("./routes/admin/index.route.js");
 
 // APP LOCAL khai báo biến toàn cục để dùng trong file bug
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+app.locals.moment = moment
 app.use(methodOverride('_method'));
 
 // parse application/x-www-form-urlencoded

@@ -24,7 +24,14 @@ const productSchema = new mongoose.Schema({
   deletedTime: Date,
   position: Number,
   discountPercentage: Number,
-  stock: Number
+  stock: Number,
+  createdBy:{
+    account_id: String,
+    createdAt: {
+      type: Date,
+      default: Date.now
+    }
+  }
 },{
   timestamps: true
 });
