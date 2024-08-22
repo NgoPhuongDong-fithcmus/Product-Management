@@ -1,8 +1,8 @@
 mixin formatDateTime(time)
-    span #{moment(item.createdBy.createdAt).format("DD/MM/YYYY hh:mm:ss")}
+    span #{moment(time).format("DD/MM/YYYY hh:mm:ss")}
 
 mixin formatDate(time)
-    span #{moment(item.createdBy.createdAt).format("DD/MM/YYYY")}
+    span #{moment(time).format("DD/MM/YYYY")}
 
 mixin formatTime(time)
-    span #{moment(item.createdBy.createdAt).format("hh:mm:ss")}
+    span #{moment(time).format("hh:mm:ss")}

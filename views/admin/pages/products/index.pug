@@ -56,6 +56,7 @@ block main
                                 th Tiêu đề
                                 th Giá
                                 th Vị trí
+                                th Người tạo
                                 th Trạng thái
                                 th Hành động 
                         tbody 
@@ -83,7 +84,8 @@ block main
                                         )
                                     td 
                                         p #{item.accountFullName}
-                                        //- +formatDateTime(item.createdBy.createdAt) 
+                                        p 
+                                          +formatDateTime(item.createdBy.createdAt)
                                     td 
                                         if(role.permissions.includes("products_edit"))
                                             if (item.status == "active")
