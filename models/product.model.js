@@ -35,7 +35,14 @@ const productSchema = new mongoose.Schema({
   deletedBy:{
     account_id: String,
     deletedAt: Date
-  }
+  },
+  // nếu ở đây muốn lưu xem những ai đã thay đổi thì ta dùng object còn không thì ta dùng mảng để lưu người mới cập nhật mới nhất là được rồi
+  updatedBy: [
+    {
+      account_id: String,
+      updatedAt: Date
+    }
+  ]
 },{
   timestamps: true
 });
