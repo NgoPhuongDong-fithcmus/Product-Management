@@ -11,9 +11,9 @@ module.exports.index = async (req, res) => {
     });
 
     // cách này dùng vẫn được, nhưng mà dùng cách trên sẽ tối ưu hơn
-    products.forEach(item => {
-        item.priceNew = item.price * (100 - 50) / 100;
-    });
+    // products.forEach(item => {
+    //     item.priceNew = item.price * (100 - 50) / 100;
+    // });
 
     res.render("client/pages/products/index.pug",{
         pageTitle: "Danh sach san pham",
