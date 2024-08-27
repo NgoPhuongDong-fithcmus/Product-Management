@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
+include ../../mixins/alert.pug
 include ../../mixins/product-layout.pug
 
 block main
@@ -49,8 +50,9 @@ block main
                                         ) Xóa
                         else 
                             h3 Không có sản phẩm nào
-                h3(class="text-right") Tổng đơn hàng: #{cartDetail.totalAll}$ 
-                div(class="text-right mt-3")
+                .col-12.d-flex.justify-content-end
+                    h3.mr-3 Tổng đơn hàng: #{cartDetail.totalAll}$ 
+                .col-12.d-flex.justify-content-end
                     a(href="/checkout" class="btn btn-success") THANH TOÁN
 
     script(src="/js/cart.js")
