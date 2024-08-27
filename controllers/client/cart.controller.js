@@ -13,9 +13,6 @@ module.exports.addPost = async (req, res) => {
     })
 
     const existedProductInCart = cart.products.find(item => item.product_id == productId);
-
-    console.log(existedProductInCart);
-
     if(existedProductInCart) {
         const quantityNew = quantity + existedProductInCart.quantity;
         await Cart.updateOne({
@@ -68,8 +65,6 @@ module.exports.index = async (req, res) => {
             item.productInfo = productInfo;
 
             item.totalPrice = productInfo.priceNew * item.quantity;
-
-            console.log(item.productInfo);
         }
     }
     
@@ -89,10 +84,47 @@ module.exports.index = async (req, res) => {
     //     }
     // }
 
-    console.log(cart);
-
     res.render("client/pages/cart/index",{
         pageTitle: "Giỏ hàng",
         cartDetail: cart
     });
 };
+
+
+// [GET] /delete/:productId
+module.exports.delete = async (req, res) => {
+    const cartId = req.cookies.cartID;
+    const productId = req.params.productId;
+
+    await Cart.updateOne({
+        _id: cartId,
+    }, {
+        $pull: { products: {product_id: productId}}
+    })
+
+    // // cách khác
+    // const cart = await Cart.findById(cartId);
+    // const indexProduct = cart.products.findIndex(dataIndex => dataIndex.product_id === productId);
+    // cart.products.splice(indexProduct, 1);
+    // await cart.save()
+    
+    req.flash("success", "Đã xóa sản phẩm khỏi giỏ hàng!");
+    res.redirect("back");
+}
+
+// [PATCH] /update/:productId/:quantity
+module.exports.update = async (req, res) => {
+    const cartId = req.cookies.cartID;
+    const productId = req.params.productId;
+    const quantity = req.params.quantity;
+
+    await Cart.updateOne({
+        _id: cartId,
+        "products.product_id": productId
+    }, {
+        $set: { "products.$.quantity":quantity}
+    })
+    
+    req.flash("success", "Cập nhật số lượng thành công!");
+    res.redirect("back");
+}

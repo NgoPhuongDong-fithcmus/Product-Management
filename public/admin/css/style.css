@@ -86,7 +86,7 @@ a {
         display: none;
     }
 }
-/* End Show Alert */
+
 
 [show-alert] [close-alert] {
     background: #ffffffc4;
@@ -99,6 +99,7 @@ a {
     border-radius: 50%;
     cursor: pointer;
 }
+/* End Show Alert */
 
 /*Image Preview */
 .image-preview {
