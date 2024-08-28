@@ -78,3 +78,9 @@ module.exports.loginPost = async (req, res) => {
     //     pageTitle: "Đăng nhập tài khoản"
     // });
 }
+
+// [GET] /user/logout
+module.exports.logout = async (req, res) => {
+    res.clearCookie("tokenUser");
+    res.redirect("/");
+}
