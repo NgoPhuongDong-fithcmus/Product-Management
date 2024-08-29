@@ -57,7 +57,6 @@ module.exports.detail = async (req, res) => {
 }
 
 module.exports.category = async (req, res) => {
-  console.log(req.params.slugCategory);
   // Tìm ra những danh mục có slug giống với slug mình cần tìm
   const category = await ProductCategory.findOne({
     deleted: false,
