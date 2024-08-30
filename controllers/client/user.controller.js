@@ -71,25 +71,35 @@ module.exports.loginPost = async (req, res) => {
         return;
     }
 
+    const cartUserLogin = await Cart.findOne({
+        user_id : user._id
+    });
+
+    console.log(cartUserLogin);
+    if(cartUserLogin){
+        res.cookie("cartID", cartUserLogin.id);
+    }
+    else{
+        await Cart.updateOne({
+            _id: req.cookies.cartID
+        },{
+            user_id: user.id
+        })
+    }
+
+
+    
+
     res.cookie("tokenUser", user.tokenUser);
 
-    await Cart.updateOne({
-        _id: req.cookies.cartID
-    },{
-        user_id: user.id
-    })
-
-
     res.redirect("/");
-    // res.render("client/pages/user/login",{
-    //     pageTitle: "Đăng nhập tài khoản"
-    // });
 }
 
 // [GET] /user/logout
 module.exports.logout = async (req, res) => {
     res.clearCookie("tokenUser");
-    // res.clearCookie("cartID");
+    res.clearCookie("cartID");
+
     res.redirect("/");
 }
 
