@@ -13,7 +13,7 @@ const database = require("./config/database.js");
 database.connect();
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3001;
 
 
 const systemConfig = require("./config/system.js");
