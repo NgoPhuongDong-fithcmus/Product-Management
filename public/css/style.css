@@ -240,3 +240,112 @@ a {
     cursor: pointer;
 }
 /* End Show Alert */
+
+/* Chat*/
+/* Container Styling */
+
+/* Chat Box */
+.chat {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/* Incoming Messages */
+.inner-incoming {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.inner-incoming .inner-name {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 3px;
+}
+
+.inner-incoming .inner-content {
+    background-color: #d1f2eb;
+    padding: 10px 15px;
+    border-radius: 10px;
+    max-width: 75%;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.inner-incoming .inner-content:before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent #d1f2eb transparent transparent;
+}
+
+/* Outgoing Messages */
+.inner-outgoing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.inner-outgoing .inner-content {
+    background-color: #aed6f1;
+    padding: 10px 15px;
+    border-radius: 10px;
+    max-width: 75%;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.inner-outgoing .inner-content:before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: -10px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent transparent #aed6f1;
+}
+
+/* Input Form */
+.inner-foot {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.inner-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inner-form input {
+    flex-grow: 1;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    border-radius: 20px;
+    outline: none;
+    margin-right: 10px;
+}
+
+.inner-form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.inner-form button i {
+    font-size: 1.2em;
+}
+
+/* EndChat*/ 

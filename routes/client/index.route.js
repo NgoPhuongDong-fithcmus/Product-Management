@@ -8,6 +8,7 @@ const homeRoutes = require("./home.route");
 const searchRoutes = require("./search.route");
 const cartRoutes = require("./cart.route");
 const checkoutRoutes = require("./checkout.route");
+const chatRoutes = require("./chat.route");
 const userRoutes = require("./user.route");
 const express = require("express");
 const router = express.Router();
@@ -32,5 +33,7 @@ module.exports = (app) => {
     app.use("/checkout", checkoutRoutes);
 
     app.use("/user", userRoutes);
+
+    app.use("/chat", chatRoutes);
     
 }

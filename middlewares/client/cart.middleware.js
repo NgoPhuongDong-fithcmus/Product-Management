@@ -178,12 +178,9 @@ module.exports.cartID = async (req, res, next) => {
             console.log("Searched for cart with cartID:", req.cookies.cartID);
 
             if (cart) {
-                console.log("Cart found:", cart);
-                
                 // Tính tổng số lượng sản phẩm trong giỏ hàng
                 cart.totalQuantity = cart.products.reduce((sum, item) => sum + item.quantity, 0);
                 res.locals.miniCart = cart;
-                console.log("miniCart set in locals with totalQuantity:", cart.totalQuantity);
             } else {
                 console.log("No cart found with the given cartID.");
             }
