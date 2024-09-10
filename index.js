@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const multer  = require('multer')
 const moment = require('moment')
+const http = require('http');
+const { Server } = require("socket.io");
 require("dotenv").config();
 
 const database = require("./config/database.js");
@@ -15,6 +17,13 @@ database.connect();
 const app = express();
 const port = process.env.PORT || 3001;
 
+// SOCKET IO
+const server = http.createServer(app);
+const io = new Server(server);
+global._io = io;
+
+
+// END SOCKET IO
 
 const systemConfig = require("./config/system.js");
 
@@ -50,6 +59,6 @@ app.get("*", (req, res) => {
   })
 })
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

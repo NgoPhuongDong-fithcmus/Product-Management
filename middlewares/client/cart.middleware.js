@@ -152,10 +152,10 @@ const Cart = require("../../models/cart.model");
 
 module.exports.cartID = async (req, res, next) => {
     try {
-        console.log("Entering cartID middleware.");
+        // console.log("Entering cartID middleware.");
 
         if (!req.cookies.cartID) {
-            console.log("No cartID cookie found, creating a new cart.");
+            // console.log("No cartID cookie found, creating a new cart.");
             
             // Tạo giỏ hàng mới nếu không có cookie `cartID`
             const cart = new Cart();
@@ -169,25 +169,25 @@ module.exports.cartID = async (req, res, next) => {
                 httpOnly: true,
             });
 
-            console.log("Created new cart and set cookie with cartID:", cart.id);
+            // console.log("Created new cart and set cookie with cartID:", cart.id);
         } else {
-            console.log("Found cartID cookie:", req.cookies.cartID);
+            // console.log("Found cartID cookie:", req.cookies.cartID);
             
             // Tìm giỏ hàng hiện tại theo cookie `cartID`
             const cart = await Cart.findOne({ _id: req.cookies.cartID });
-            console.log("Searched for cart with cartID:", req.cookies.cartID);
+            // console.log("Searched for cart with cartID:", req.cookies.cartID);
 
             if (cart) {
                 // Tính tổng số lượng sản phẩm trong giỏ hàng
                 cart.totalQuantity = cart.products.reduce((sum, item) => sum + item.quantity, 0);
                 res.locals.miniCart = cart;
             } else {
-                console.log("No cart found with the given cartID.");
+                // console.log("No cart found with the given cartID.");
             }
         }
         next();
     } catch (err) {
-        console.error("Error in cartID middleware:", err);
+        // console.error("Error in cartID middleware:", err);
         next(err); // Chuyển tiếp lỗi nếu có
     }
 }
