@@ -75,7 +75,6 @@ module.exports.loginPost = async (req, res) => {
         user_id : user.id
     });
 
-    console.log(cartUserLogin);
     if(cartUserLogin){
         res.cookie("cartID", cartUserLogin.id);
     }
@@ -95,8 +94,8 @@ module.exports.loginPost = async (req, res) => {
 
 // [GET] /user/logout
 module.exports.logout = async (req, res) => {
-    // res.clearCookie("tokenUser");
-    // res.clearCookie("cartID");
+    res.clearCookie("tokenUser");
+    res.clearCookie("cartID");
 
     res.redirect("/");
 }

@@ -26,17 +26,16 @@ if(tablePermissions) {
                 inputs.forEach((input, index) => {
                     const checked = input.checked;
 
-                    console.log(name);
-                    console.log(index);
-                    console.log(checked);
-                    console.log("--------------------");
+                    // console.log(name);
+                    // console.log(index);
+                    // console.log(checked);
+                    // console.log("--------------------");
                     if(checked){
                     permissionsParent[index].permissions.push(name);
                     }
                 });
             }
         });
-        console.log(permissionsParent);
 
         if(permissionsParent.length > 0) {
             const formChangePermissions = document.querySelector("#form-change-permissions")

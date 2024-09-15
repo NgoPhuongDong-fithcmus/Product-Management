@@ -248,9 +248,6 @@ a {
 .chat {
     background-color: #fff;
     border-radius: 10px;
-    padding: 15px;
-    max-height: 500px;
-    overflow-y: auto;
 }
 
 .chat .inner-body {
@@ -355,4 +352,25 @@ a {
 }
 
 /* EndChat*/ 
+
+/* Show Icon Emoji */
+
+.tooltip {
+    visibility: hidden;
+}
+
+.tooltip.shown {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* End Show Icon Emoji */
+
+/* css cho icon emoji */
+i.fa-regular.fa-face-smile {
+    font-size: 24px;
+    padding-right: 6px;
+    vertical-align: middle;
+}
+/* end css cho icon emoji */
 

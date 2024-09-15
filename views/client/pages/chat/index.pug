@@ -17,25 +17,6 @@ block main
                                     .inner-name  #{chat.infoUser.fullName}
                                 .inner-content 
                                     | #{chat.content}
-                        //- .inner-incoming 
-                        //-     .inner-name Em Yêu 
-                        //-     .inner-content 
-                        //-         | Anh ơi sáng nhà em nha, nhà em không có ai ở nhà cả
-
-                        //- .inner-outgoing 
-                        //-     .inner-content 
-                        //-         | Thế à? OK em iu 
-                        //- .inner-incoming 
-                        //-     .inner-name Em Yêu 
-                        //-     .inner-content 
-                        //-         | Nhanh nha nhanh nha 
-                        //- .inner-outgoing 
-                        //-     .inner-content 
-                        //-         | Chồng đến rồi mà thấy ai ở nhà đâu em? Khóa cửa mà 
-                        //- .inner-incoming 
-                        //-     .inner-name Em Yêu 
-                        //-     .inner-content 
-                        //-         | Thì em bảo nhà em không ai ở nhà mà :
                     .inner-foot 
                         form(
                             class="inner-form"
@@ -46,5 +27,9 @@ block main
                                 placeholder="Nhập ..."
                                 name="content"
                             )
+                            span(class="button-icon") 
+                                i.fa-regular.fa-face-smile
                             button 
                                 i.fa-solid.fa-paper-plane
+    div(class="tooltip" role="tooltip")
+        emoji-picker(class="light")
