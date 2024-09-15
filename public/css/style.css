@@ -253,6 +253,12 @@ a {
     overflow-y: auto;
 }
 
+.chat .inner-body {
+    padding: 10px;
+    max-height:450px;
+    overflow-y: auto;
+}
+
 /* Incoming Messages */
 .inner-incoming {
     display: flex;
@@ -349,3 +355,4 @@ a {
 }
 
 /* EndChat*/ 
+

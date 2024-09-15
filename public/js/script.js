@@ -1,5 +1,4 @@
 // Show Alert
-console.log("chay vao day nhe")
 const showAlert = document.querySelector("[show-alert]");
 if(showAlert){
     const time = parseInt(showAlert.getAttribute("data-time"));
