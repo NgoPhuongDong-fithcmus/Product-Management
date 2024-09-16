@@ -22,6 +22,16 @@ module.exports.chat = async (req, res) => {
                 content: content
             });
         })
+
+        // Typing
+        socket.on("CLIENT_SEND_TYPING", async (type) => {
+            socket.broadcast.emit("SERVER_RETURN_TYPING", {
+                fullName: fullName,
+                userId: userId,
+                type: type
+            });
+        })
+        // End Typing
     });
 
     // Lấy data từ database
