@@ -76,7 +76,6 @@ module.exports.index = async (req, res) => {
   }
   
   
-  
   res.render("admin/pages/products/index.pug", {
     pageTitle: "Trang danh sách sản phẩm",
     products: products,
@@ -219,8 +218,6 @@ module.exports.edit = async (req, res) => {
       _id : req.params.id
     }
     
-
-
     const product = await Product.findOne(find);
   
     res.render("admin/pages/products/edit", {

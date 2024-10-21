@@ -1,38 +1,18 @@
 const Chat = require("../../models/chat.model");
 const User = require("../../models/user.model");
+const uploadToCloudinary = require("../../helpers/uploadToCloudinary");
+
+const chatSocket = require("../../sockets/client/chat.socket");
+
 module.exports.chat = async (req, res) => {
 
     const userId = res.locals.user.id;
     const fullName = res.locals.user.fullName;
 
     // Socket IO
-    _io.once('connection', (socket) => {
-        socket.on("CLIENT_SEND_MESSAGE", async (content) => {
-            // Lưu vào database
-            const chat = new Chat({
-                user_id: userId,
-                content: content
-            });
-            await chat.save();
+    chatSocket(res);
+    // End Socket IO
 
-            // Trả data về cho client có nghĩa là chat xong nó nhận liền hiển thị liền á
-            _io.emit("SERVER_RETURN_MESSAGE", {
-                fullName: fullName,
-                userId: userId,
-                content: content
-            });
-        })
-
-        // Typing
-        socket.on("CLIENT_SEND_TYPING", async (type) => {
-            socket.broadcast.emit("SERVER_RETURN_TYPING", {
-                fullName: fullName,
-                userId: userId,
-                type: type
-            });
-        })
-        // End Typing
-    });
 
     // Lấy data từ database
     const chats = await Chat.find({deleted: false});
@@ -51,4 +31,18 @@ module.exports.chat = async (req, res) => {
         pageTitle: "Chat",
         chats: chats
     });
+}
+
+module.exports.chatPost = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).send("Không có file nào được tải lên.");
+        }
+        const filePath = `/uploads/${req.file.originalname}`;  // Đường dẫn lưu file
+
+        res.json({ filePath: filePath });  // Trả về đường dẫn file cho client
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Lỗi server trong quá trình tải file.");
+    }
 }

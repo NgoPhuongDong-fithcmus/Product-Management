@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../../Workspace/w3school-band"
+		},
+		{
+			"path": "../../../../../../../HOC_FRONT_END_PROJECT_2023"
+		},
+		{
+			"path": "../../../../../.."
+		},
+		{
+			"path": "../../../.."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "DSA_28Tech",
+		"files.associations": {
+			"iostream": "cpp"
+		}
+	}
+}

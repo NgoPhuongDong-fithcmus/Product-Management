@@ -21,8 +21,6 @@ const port = process.env.PORT || 3001;
 const server = http.createServer(app);
 const io = new Server(server);
 global._io = io;
-
-
 // END SOCKET IO
 
 const systemConfig = require("./config/system.js");
