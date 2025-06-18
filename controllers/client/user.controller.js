@@ -190,8 +190,6 @@ module.exports.otpPassword = async (req, res) => {
 //     const confirmPassword = req.body.confirmPassword;
 //     const token = req.cookies.tokenUser;
 
-//     console.log(password);
-
 //     await User.updateOne({
 //         tokenUser: token,
 //     },
@@ -211,14 +209,10 @@ module.exports.otpPasswordPost = async (req, res) => {
     const email = req.body.email;
     const otp = req.body.otp;
 
-    console.log(otp);
-
     const result = await ForgotPassword.findOne({
         email: email,
         OTP: otp
     });
-
-    console.log(result);
 
     // Xử lý nếu không tìm thấy OTP khớp
     if (!result) {
@@ -294,8 +288,6 @@ module.exports.info = async (req, res) => {
     const infoUser = await User.findOne({
         tokenUser: tokenUser
     }).select("-password");
-
-    console.log(infoUser);
 
     res.render("client/pages/user/info",{
         pageTitle: "Thông tin tài khoản",

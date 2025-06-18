@@ -6,7 +6,11 @@ header.header
             .col-2 
                 .inner-logo 
                     a(href="/")
-                        img(src=settingGeneral.logo, alt="Logo") 
+                        if settingGeneral && settingGeneral.logo
+                            img(src=settingGeneral.logo, alt="Logo")
+                        else
+                            //- Không hiển thị gì nếu không có logo
+
             .col-3
                 form(
                     action="/search"

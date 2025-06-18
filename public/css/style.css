@@ -31,6 +31,10 @@
     padding: 10px;
 }
 
+.footer {
+    margin-bottom: auto;
+}
+
 .product-item .inner-content .inner-discount {
     font-size: 14px;
     font-weight: 600;

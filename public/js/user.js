@@ -11,6 +11,11 @@ if(listBtnAddFriend.length > 0) {
             const userId = button.getAttribute("btn-add-friend");
 
             socket.emit("CLIENT_ADD_FRIEND", userId);
+
+            boxUser.classList.add("add");
+            button.innerText = "Hủy kết bạn";
+            button.removeAttribute("btn-add-friend");
+            button.setAttribute("btn-cancel-friend", userId);
         });
     })
 }
@@ -27,6 +32,11 @@ if(listBtnCancelFriend.length > 0) {
             const userId = button.getAttribute("btn-cancel-friend");
 
             socket.emit("CLIENT_CANCEL_FRIEND", userId);
+
+            boxUser.classList.remove("add");
+            button.innerText = "Kết bạn";
+            button.removeAttribute("btn-cancel-friend");
+            button.setAttribute("btn-add-friend", userId);
         });
     })
 }
@@ -50,7 +60,7 @@ if(listBtnRefuseFriend.length > 0) {
 
 // End Chức năng từ chối kết bạn
 
-// Chức năng từ chối kết bạn
+// Chức năng chấp nhận kết bạn
 
 const listBtnAcceptFriend = document.querySelectorAll("[btn-accept-friend]");
 if(listBtnAcceptFriend.length > 0) {
@@ -65,4 +75,18 @@ if(listBtnAcceptFriend.length > 0) {
     })
 }
 
-// End Chức năng từ chối kết bạn
+// End Chức năng chấp nhận kết bạn
+
+// SERVER_RETURN_LENGTH_ACCEPT_FRIENDS
+const badgeUsersAccept = document.querySelector("[badge-users-accept]");
+if(badgeUsersAccept) {
+    socket.on("SERVER_RETURN_LENGTH_ACCEPT_FRIENDS", (data) => {
+        console.log(data.userId);
+        const userId = badgeUsersAccept.getAttribute("[badge-users-accept]");
+        console.log(userId);
+        if(data.userId === userId) {
+            badgeUsersAccept.innerHTML = data.lengthAcceptFriends;
+        }
+    })
+}
+// END SERVER_RETURN_LENGTH_ACCEPT_FRIENDS

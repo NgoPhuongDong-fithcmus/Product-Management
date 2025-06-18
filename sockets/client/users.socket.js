@@ -37,6 +37,18 @@ module.exports = (res) => {
                 })
             }
 
+            // Lấy ra độ dài acceptFriends của B và trả về cho B
+            const infoUserB = await User.findOne({
+                _id: userId
+            });
+
+            const lengthAcceptFriends = infoUserB.acceptFriends.length;
+            console.log(lengthAcceptFriends);
+
+            socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIENDS", {
+                userId: userId,
+                lengthAcceptFriends: lengthAcceptFriends
+            });
         })
 
         socket.on("CLIENT_CANCEL_FRIEND", async (userId) => {

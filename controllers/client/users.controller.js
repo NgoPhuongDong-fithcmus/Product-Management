@@ -13,22 +13,26 @@ module.exports.notFriend = async (req, res) => {
         _id: userId
     })
 
+    const listFriends = myUser.friendList.map(friend => friend.user_id.toString());
+    
+
     const requestFriends = await myUser.requestFriends;
     const acceptFriends = await myUser.acceptFriends;
 
-    const users = await User.find({
+    let users = await User.find({
         $and: [
             {_id: {$ne: userId}},
             {_id: {$nin: requestFriends}},
-            {_id: {$nin: acceptFriends}}
+            {_id: {$nin: acceptFriends}},
+            {_id: {$nin: listFriends}}
         ],
         status: "active",
         deleted: false  
-    }).select("fullName id avatar ")
+    }).select("fullName _id avatar ").lean();
 
     res.render("client/pages/users/not-friend",{
         pageTitle: "Danh sách người dùng",
-        users: users
+        users: users,
     });
 } 
 
@@ -72,6 +76,8 @@ module.exports.accept = async (req, res) => {
 
     const acceptFriends = myUser.acceptFriends;
 
+    console.log(acceptFriends.length);
+
     const users = await User.find({
         _id: {$in: acceptFriends},
         status: "active",
@@ -83,3 +89,31 @@ module.exports.accept = async (req, res) => {
         users: users
     });
 } 
+
+module.exports.getListFriends = async (req, res) => {
+    // Socket
+    usersSocket(res);
+    // End Socket
+
+    const userId = res.locals.user.id;
+
+    const myUser = await User.findOne({
+        _id: userId
+    });
+
+    const listFriends = myUser.friendList.map(friend => friend.user_id.toString());
+    console.log(listFriends);
+
+    // Lấy thông tin bạn bè
+    const users = await User.find({
+        _id: {$in: listFriends},
+        status: "active",
+        deleted: false
+    }).select("fullName _id avatar").lean();
+
+    res.render("client/pages/users/list-friends", {
+        pageTitle: "Danh sách bạn bè",
+        listFriends: listFriends,
+        users: users
+    });
+}

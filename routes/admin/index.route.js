@@ -27,4 +27,6 @@ module.exports = (app) => {
 
     app.use(PATH_ADMIN + "/settings", authMiddleware.requireAuth, settingRoute);
 
+    app.use(PATH_ADMIN + "/", authMiddleware.requireAuth, authRoute)
+
 }
